@@ -26,7 +26,7 @@ with:
 ## Problem statement
 
 You have tests failures in CI and you cannot seem to reproduce them locally.
-To make things worse, the tests only fail intermittently and error messages and tracebacks lead you anywhere.
+To make things worse, the tests only fail intermittently and error messages and tracebacks lead you nowhere.
 What options do you have, besides witchery and clairvoyance, to learn more about the root cause?
 
 
