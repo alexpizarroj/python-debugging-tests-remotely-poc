@@ -185,15 +185,15 @@ Done.
 This concludes this demo.
 
 
-## Other practical usages
-
-1. https://docs.celeryproject.org/en/v5.1.2/userguide/debugging.html describes how to debug Celery tasks remotely using `celery.contrib.rdb`, a Celery-owned implementation of remote debugging, similar to `python-remote-pdb`. This can be helpful when working in tasks locally, in cases where you don't want to resort to enabling [task_always_eager](https://docs.celeryproject.org/en/stable/userguide/configuration.html#std-setting-task_always_eager) to avoid execution environment discrepancies.
-
-2. In https://www.codementor.io/@jorgecolon/remote-debugging-in-python-v1cbnej91, Jorge Colon explains how one may set up an application along either Visual Studio Code or PyCharm for remote debugging **in Production**. The packages shown in his article are different from the ones used in this proof of concept.
-
-
 ## Known caveats
 
 1. Currently, there's no way to specify a debug session timeout in order to avoid blocking test execution indefinitively when a developer doesn't connect.
 
 2. The user interface from `python-web-pdb` hangs after the debug session ends, not letting developers know that session ended.
+
+
+## Similar techniques
+
+1. https://docs.celeryproject.org/en/v5.1.2/userguide/debugging.html describes how to debug Celery tasks remotely using `celery.contrib.rdb`, a Celery-owned implementation of remote debugging, similar to `python-remote-pdb`. This can be helpful when working in tasks locally, in cases where you don't want to resort to enabling [task_always_eager](https://docs.celeryproject.org/en/stable/userguide/configuration.html#std-setting-task_always_eager) to avoid execution environment discrepancies.
+
+2. In https://www.codementor.io/@jorgecolon/remote-debugging-in-python-v1cbnej91, Jorge Colon explains how one may set up an application along either Visual Studio Code or PyCharm for remote debugging **in Production**. The packages shown in his article are different from the ones used in this proof of concept.
