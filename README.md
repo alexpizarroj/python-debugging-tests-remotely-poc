@@ -71,10 +71,38 @@ Run the demo with:
 ./scripts/02-remote-debugger.sh
 ```
 
-In a separate terminal window, connect with:
+You should see:
+```
+================================================================================ test session starts ================================================================================
+platform linux2 -- Python 2.7.18, pytest-4.6.11, py-1.10.0, pluggy-0.13.1
+rootdir: /app
+collected 1 item                                                                                                                                                                    
+
+tests/test_dummy.py F
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> traceback >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+    def test_dummy():
+        # --You may start a debug session using the debugger configured with --pdbcls by doing:
+        # import pytest; pytest.set_trace()
+        # --Alternatively, PyTest can auto-start a debug session on test failures if run with the --pdb flag
+>       assert True is False
+E       assert True is False
+
+tests/test_dummy.py:5: AssertionError
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> entering PDB >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> PDB post_mortem (IO-capturing turned off) >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+2021-07-09 20:53:47,900: remote_pdb - remote_pdb:18 - CRITICAL - RemotePdb session open at 0.0.0.0:7200, waiting for connection ...
+RemotePdb session open at 0.0.0.0:7200, waiting for connection ...
+```
+
+Notice how the last line states that a debug session is now waiting for connection on port `7200`.
+
+In a separate terminal window, connect to the debug session with:
 ```bash
 telnet localhost 7200
 ```
+
 After connecting you should see:
 ```bash
 Trying 127.0.0.1...
@@ -102,7 +130,33 @@ Run the demo with:
 ./scripts/03-web-debugger.sh
 ```
 
-In a web browser, navigate to:
+You should see:
+```
+================================================================================ test session starts ================================================================================
+platform linux2 -- Python 2.7.18, pytest-4.6.11, py-1.10.0, pluggy-0.13.1
+rootdir: /app
+collected 1 item                                                                                                                                                                    
+
+tests/test_dummy.py F
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> traceback >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+    def test_dummy():
+        # --You may start a debug session using the debugger configured with --pdbcls by doing:
+        # import pytest; pytest.set_trace()
+        # --Alternatively, PyTest can auto-start a debug session on test failures if run with the --pdb flag
+>       assert True is False
+E       assert True is False
+
+tests/test_dummy.py:5: AssertionError
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> entering PDB >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> PDB post_mortem (IO-capturing turned off) >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+2021-07-09 20:58:08,258: root - web_console:110 - CRITICAL - Web-PDB: starting web-server on 9867e34c017a:7200...
+```
+
+Notice how the last line states that a Web-PDB web server is now listening on port `7200`.
+
+Using a web browser, navigate to:
 ```bash
 http://localhost:7200
 ```
@@ -134,12 +188,16 @@ Run the demo with:
 ./scripts/04-remote-debugger-with-test-shards.sh
 ```
 
-Wait until you see debug events stating that remote sessions are available:
+You should initially see something like:
 ```
 Starting test shard #1
 Starting test shard #2
 Starting test shard #3
 Waiting for test shard #3 to finish...
+```
+
+After a few seconds, debug events should appear, stating that debug sessions are available for connection:
+```
 [MONITOR_DEBUG_EVENTS] Starting to monitor remote debugger events
 [MONITOR_DEBUG_EVENTS] New remote debugger session available on port 7202
 [MONITOR_DEBUG_EVENTS] New remote debugger session available on port 7201
